@@ -1,0 +1,113 @@
+data warehouse => its centrerize repo or  on rogaanastion centrally store all your data
+
+-- why we use data warehouse--
+-- in showrt We use a Data Warehouse to integrate all business data, improve reporting speed, store historical data, and support better decisions through reliable analytics.
+Do you want me to also give you a real-life example (like Amazon or a Bank) of how they use a data warehouse
+
+-- in long term -- 
+=> for work on historical data we have use data warehouse
+=> time travel
+==> subject oriented=> kissi particular rqquierment ke according store honga data
+=> data intrigity=> mena sthose dtaa our uses we will store another we not use
+=> non volatige=> menas no changebale its menns in data warehiouse any data 
+		we store so tha tdata will be not changeable and in thi we not use update 
+		and delete.
+
+1. What is a Database?
+
+A Database is an organized collection of data that is stored electronically and can be easily accessed, managed, and updated.
+
+It is managed using a DBMS (Database Management System) like Oracle, MySQL, SQL Server, PostgreSQL, MongoDB, etc.
+
+Databases are mainly used for day-to-day operations like storing customer details, transactions, employee records, etc. 
+
+2. Features of a Database
+
+Data Organization – Stores data in structured format (tables, rows, columns).
+
+Data Integrity – Ensures accuracy and consistency of data.
+
+Data Security – Provides authentication and authorization (only authorized users can access).
+
+Concurrency Control – Many users can access the database at the same time without conflict.
+
+Backup and Recovery – Data can be restored in case of failure or crash.
+
+Scalability – Can handle large amounts of data as business grows.
+
+Reduced Data Redundancy – Minimizes duplicate data using normalization.
+
+ACID Properties – Ensures transactions are reliable (Atomicity, Consistency, Isolation, Durability).
+
+3. Drawbacks (Disadvantages) of Databases
+
+Costly Setup & Maintenance
+
+Hardware, software, and skilled administrators are expensive.
+
+Complexity
+
+Designing and managing a database requires technical expertise.
+
+Performance Issues with Large Data
+
+Traditional databases may slow down when handling very large volumes of data (this is why Big Data tools are needed).
+
+Security Risks
+
+If hacked, sensitive data (like banking or personal info) can be misused.
+
+Single Point of Failure
+
+If the main database server crashes and backup is not available, operations stop.
+
+Upgrades and Migration Issues
+
+Moving from one database system to another can be complex and time-consuming.
+
+
+Data Warehouse (DWH) is a centralized repository where data from multiple sources is collected, stored, and managed specifically for analysis, reporting, and decision-making.
+
+Here’s a simple explanation:
+
+1. Definition=>
+
+A Data Warehouse is a large database designed for querying and analytics, not for day-to-day operations.
+
+It stores historical and current data in an organized way to help businesses make better decisions.
+
+2. Key Features=>
+
+Subject-Oriented – Focuses on specific business areas like sales, customers, or products.
+
+Integrated – Combines data from different sources (databases, ERP systems, Excel files, etc.).
+
+Time-Variant – Maintains historical data to analyze trends over time.
+
+Non-Volatile – Once data is stored, it is not frequently changed or deleted.
+
+3. Purpose / Why Use It
+
+To provide a single source of truth for business data.
+
+To enable business intelligence (BI) and analytics.
+
+To help identify trends, patterns, and insights from historical data.
+
+4. Example
+
+A retail company collects data from:
+
+Online sales
+
+Physical stores
+
+Customer support systems
+
+All this data is stored in a data warehouse. Analysts can then generate reports like:
+
+Monthly sales by region
+
+Best-selling products
+
+Customer buying patterns
