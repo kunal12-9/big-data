@@ -1,0 +1,18 @@
+-- Naya database create
+CREATE OR REPLACE DATABASE movie_ratings_db;
+
+-- Database select karna
+USE DATABASE movie_ratings_db;
+
+-- Naya schema create
+CREATE OR REPLACE SCHEMA internal_stages;
+
+-- Schema select karna
+USE SCHEMA internal_stages;
+
+CREATE OR REPLACE STAGE internal_stage;
+
+SELECT * FROM ratingtest;
+
+
+
