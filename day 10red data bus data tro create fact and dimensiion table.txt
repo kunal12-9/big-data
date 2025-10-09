@@ -1,0 +1,126 @@
+-- crte data abse and table
+
+create or replace database redbus_db;
+use database redbus_db;
+create or replace schema public;
+-- create external stage
+create or replace stage redbus_db.public.aws_stage_redbus
+url='s3://mydemo637734'
+credentials=(''
+aws_secret_key='');
+list @redbus_db.public.aws_stage_redbus;
+
+-- create a file format
+create or replace file format my_csv_format
+type = 'csv'
+field_delimiter = ','
+skip_header = 1;
+
+-- create raw table to laod file
+create or replace table redbus_db.public.redbus_raw (
+    id int,
+    first_name string,
+    last_name string,
+    age int,
+    city_from string,
+    city_to string,
+    bus_type string,
+    seat_type string,
+    booking_type string,
+    payment_method string,
+    ticket_fare float
+);
+
+select * from redbus_db.public.redbus_raw;
+-- know copy data into raw table for table in s3 bucket
+copy into redbus_db.public.redbus_raw
+from @redbus_db.public.aws_stage_redbus
+file_format = (type = csv field_delimiter = ',' skip_header = 1)
+pattern = '.*REDBUS_FINAL.*[.]csv';
+
+-- verify data
+
+select * from redbus_db.public.redbus_raw limit 10;
+-- create a dirmensons tbale
+create or replace table dim_passenger as
+select distinct
+    id as passenger_id,
+    first_name,
+    last_name,
+    age
+from redbus_raw;
+
+create or replace table dim_route as
+select distinct
+    city_from,
+    city_to
+from redbus_raw;
+
+create or replace table dim_bus as
+select distinct
+    bus_type,
+    seat_type
+from redbus_raw;
+
+
+create or replace table dim_booking as
+select distinct
+    booking_type,
+    payment_method
+from redbus_raw;
+
+-- fact tbale
+create or replace table fact_ticket_booking as
+select
+    r.id as passenger_id,
+    r.city_from,
+    r.city_to,
+    r.bus_type,
+    r.seat_type,
+    r.booking_type,
+    r.payment_method,
+    r.ticket_fare
+from redbus_raw r;
+
+-- verfy all tables
+select * from dim_passenger limit 5;
+select * from dim_route limit 5;
+select * from dim_bus limit 5;
+select * from dim_booking limit 5;
+select * from fact_ticket_booking limit 5;
+
+
+select * from redbus_raw;
+
+
+-- 1. Find highest paying passenger for each bus type age > 25
+-- 2. Find total number of passengers travelling from each source city and show city with most passengers
+-- 3. Find total revenue collected by booking type and show booking type with lowest revenue
+-- 4. Find total bookings for each booking type and show which booking type has maximum bookings
+-- 5. Find bus type with maximum passengers
+-- 6. Find destination city with maximum and minimum passengers
+-- 7. Find ticket fare booked most frequently
+-- 8. Find age group with maximum passengers and highest ticket fare passenger
+-- 9. Find booking type with maximum bookings
+-- 10. Find source city generating maximum revenue
+
+
+-- 1 har bus type mein sabse zyada ticket fare wala passenger jinki age 25 se zyada hai
+
+-- 2. Har source city se total passengers kitne travel kar rahe hain aur kaunsi city mein sabse zyada passengers hain
+
+-- 3. Har booking type se total revenue kitna aaya aur kaunsi booking type se sabse kam revenue mila
+
+-- 4 Show total bookings and total revenue for each booking type and find which booking type is most profitable
+
+-- 5.Kaunsi bus type mein sabse zyada passengers travel kar rahe hain
+
+-- 6.Show total passengers and revenue for each destination city and find which city generates the highest and lowest revenue
+
+-- 7.Show total tickets booked for each ticket fare and find which fare is booked the most
+
+-- 8.Kaunsi age group mein sabse zyada passengers hain aur sabse mehngi ticket kisne book ki
+
+-- 9.Kaunsi booking type mein sabse zyada bookings hui
+
+-- 10.Calculate total revenue from each source city and find which city generates the highest revenue
